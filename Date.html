@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<script>
+  //here the date is in object.so, there is no problem in calculating things.
+  //refer date document from mdn dox.
+  var input = document.createElement('input');
+input.type = "date";
+
+var button = document.createElement('button');
+button.innerHTML = "Display";
+button.style.color = "white";
+button.style.backgroundColor = "blue";
+document.body.append(input,button);
+
+var ed2 = document.createElement('p');
+var years = document.createElement('p');
+
+button.addEventListener("click",function(){
+  var ed = new Date(document.querySelector('input').value);
+  ed2.append(ed);
+  console.log((ed2));
+  
+  
+  var cd = new Date();
+  years = `years : ${cd.getFullYear()-ed.getFullYear()}`
+  document.body.append(years)
+})
+
+
+//here the date is in string format therefore we cannot calculate things so the sol is parse it to objects by using date parse.
+var dateelement = document.createElement('input');
+dateelement.type = "date";
+dateelement.id = 'dob';
+
+var button = document.createElement('button');
+button.innerHTML = "Display";
+button.setAttribute('onclick','displaydate()')    //why cant i use button.addeventlistner("click",displaydate());
+
+var res = document.createElement('div');
+res.id = "res";
+
+function displaydate(){
+  var input = document.getElementById('dob').value;
+  console.log(typeof(input));
+  if(Date.parse(input)){
+    var inputdate = new Date(input);
+    console.log(inputdate);
+    var currentdate = new Date();
+    console.log(currentdate);
+    
+    var millisecdiff = (currentdate.getTime() - inputdate.getTime())  //getMilliseconds() will return oly the cuurent millisecond.but getTime () Will return the millsecond from the unix epoch time.
+    console.log(millisecdiff);
+
+    var sec = (millisecdiff/1000); 
+    console.log(Math.floor(sec));  //math.floor leave no decimals.
+
+    var min = (sec/1000);
+    console.log(Math.floor(min));
+
+    var hours = (min/1000);
+    console.log(Math.floor(hours));
+
+    var day = (hours/24);
+    console.log(Math.floor(day));
+
+    var year = currentdate.getFullYear() - inputdate.getFullYear();
+    console.log(year)
+}
+}
+document.body.append(dateelement,button);
+
+
+
+var inp = document.createElement('input');
+inp.type = "date";
+inp.id = "inp"
+
+var but = document.createElement('button');
+but.innerHTML = "Display";
+but.style.color = "white";
+but.style.backgroundColor = "green";
+but.addEventListener("click",function(){
+  var ay = new Date(document.querySelector('#inp').value);
+  console.log(typeof(ay));
+
+  var ey = new Date();
+  console.log(ey);
+
+  var y = ey.getFullYear() - ay.getFullYear();
+  console.log(y);
+  
+  var ms = ey.getTime() - ay.getTime();
+  console.log(ms);
+  
+  var se = at(ms,1000);
+  console.log(se);
+
+  var m = at(se,60);
+  console.log(m);
+
+  var h = at(m,60);
+  console.log(h);
+
+  var mon = ((y*12) + (ey.getMonth() - ay.getMonth()));
+  console.log(mon);
+})
+
+function at(value1,value2){
+return Math.floor(value1/value2);  
+}
+document.body.append(inp,but);
+
+</script>
+
+</body>
+</html>
